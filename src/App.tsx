@@ -49,7 +49,7 @@ function App() {
     )
     const idempotencyKey = uuid()
 
-    const requestOptions = {
+    const requestOptions: RequestInit = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
