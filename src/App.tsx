@@ -2,11 +2,11 @@ import CryptoJS from "crypto-js"
 import React, { useState } from "react"
 import { v4 as uuid } from "uuid"
 import "./App.css"
-import logo from "./logo.svg"
-
+import mlynoteka from "./mlynoteka.svg"
 // TODO: i18n for PL-pl
 
 function App() {
+  //Zamienic logo "MLYNOTEKA" na "TEATR MLYN"
   // TODO: Prefill amount from URL param
   const [email, emailSetter] = useState<string>("")
   const [amount, amountSetter] = useState<string>("10")
@@ -71,10 +71,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* TODO: Logo & branding, copy from https://mlynoteka.mlyn.org/asset/static/img/mlynoteka-logo.svg */}
-        <img src={logo} className="App-logo" alt="logo" />
-
-        <form onSubmit={handleSubmit}>
+        <img src={mlynoteka} className="App-logo" alt="logo" />
+        <hr className="hrTag" />
+        <form onSubmit={handleSubmit} className="formCSS">
           <label>
             <p>Email</p>
             <input
@@ -94,7 +93,7 @@ function App() {
               onChange={handleAmountChange}
             />
           </label>
-          <input type="submit" value="Donate" />
+          <input type="submit" value="Donate" className="submitButton" />
         </form>
 
         {postError}
