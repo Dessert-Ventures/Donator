@@ -71,7 +71,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* TODO: Logo & branding */}
+        {/* TODO: Logo & branding, copy from https://mlynoteka.mlyn.org/asset/static/img/mlynoteka-logo.svg */}
         <img src={logo} className="App-logo" alt="logo" />
 
         <form onSubmit={handleSubmit}>
