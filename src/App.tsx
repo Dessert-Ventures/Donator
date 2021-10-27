@@ -2,6 +2,7 @@ import CryptoJS from "crypto-js"
 import React, { useState } from "react"
 import { v4 as uuid } from "uuid"
 import "./App.css"
+import MinePopover from "./components/MinePopover"
 import mlynoteka from "./mlynoteka.svg"
 // TODO: i18n for PL-pl
 
@@ -75,9 +76,13 @@ function App() {
       <header className="App-header">
         <img src={mlynoteka} className="App-logo" alt="logo" />
         <hr className="hrTag" />
-        <form onSubmit={handleSubmit} className="formCSS">
+        <h4 className="upperText">
+          Dziękujemy za zainteresowanie wsparciem naszej działaności
+        </h4>
+        <form onSubmit={handleSubmit} className="form">
           <label>
             <p>Email</p>
+            <MinePopover />
             <input
               type="string"
               name="email"
@@ -97,7 +102,10 @@ function App() {
           </label>
           <input type="submit" value="Donate" className="submitButton" />
         </form>
-
+        <hr className="hrTag" />
+        <h4 className="upperText">
+          Dziękujemy za zainteresowanie wsparciem naszej działaności
+        </h4>
         {postError}
       </header>
     </div>
