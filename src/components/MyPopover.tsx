@@ -2,7 +2,8 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline"
 import Popover from "@mui/material/Popover"
 import Typography from "@mui/material/Typography"
 import * as React from "react"
-export default function MinePopover() {
+
+export default function MyPopover() {
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null)
 
   const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -45,6 +46,7 @@ export default function MinePopover() {
       >
         <Typography sx={{ p: 1 }}>
           Email bedzie wykorzystywany w celu przeprowadzenia płatności
+          {/* TOOD: Make dynamic */}
         </Typography>
       </Popover>
     </div>

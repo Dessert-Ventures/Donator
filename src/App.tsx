@@ -2,7 +2,7 @@ import CryptoJS from "crypto-js"
 import React, { useEffect, useState } from "react"
 import { v4 as uuid } from "uuid"
 import "./App.css"
-import MinePopover from "./components/MinePopover"
+import MyPopover from "./components/MyPopover"
 import { validateAmount, validateEmail } from "./Helpers"
 import mlynoteka from "./mlynoteka.svg"
 
@@ -151,7 +151,7 @@ function App() {
         <form onSubmit={handleSubmit} className="form">
           <label>
             <p>Email</p>
-            <MinePopover />
+            <MyPopover />
             <input
               type="string"
               name="email"
