@@ -63,7 +63,9 @@ function App() {
     postErrorsSetter(undefined)
 
     const apiUrl =
-      "https://cors-anywhere.herokuapp.com/https://api.sandbox.paynow.pl/v1/payments"
+      "https://cors-anywhere.herokuapp.com/https://api.sandbox.paynow.pl/v1/payments" // TODO: Self-host
+
+    // TODO: Set to production keys
     const apiKey = "97a55694-5478-43b5-b406-fb49ebfdd2b5"
     const apiSignatureKey = "b305b996-bca5-4404-a0b7-2ccea3d2b64b"
 
