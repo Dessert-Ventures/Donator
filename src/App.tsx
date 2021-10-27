@@ -1,9 +1,14 @@
 import CryptoJS from "crypto-js"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { v4 as uuid } from "uuid"
 import "./App.css"
 import mlynoteka from "./mlynoteka.svg"
 // TODO: i18n for PL-pl
+
+const DEV_MODE = process.env.NODE_ENV === "development" || false
+const APP_URL = DEV_MODE
+  ? "http://localhost:3000"
+  : "https://mlyndonator.netlify.app" // TODO: Use final domain URL
 
 function App() {
   //Zamienic logo "MLYNOTEKA" na "TEATR MLYN"
@@ -52,7 +57,7 @@ function App() {
       description: description,
       externalId: uuid(),
       buyer: { email: buyerEmail },
-      continueUrl: "https://mlyn.org", // TODO: Insert app URL here
+      continueUrl: APP_URL,
     })
     const signature = CryptoJS.enc.Base64.stringify(
       CryptoJS.HmacSHA256(requestBody, apiSignatureKey)
@@ -96,6 +101,11 @@ function App() {
         loadingSetter(false)
       })
   }
+
+  useEffect(() => {
+    // TODO: Analytics
+    DEV_MODE && console.debug("Donator running in dev mode")
+  }, [])
 
   return (
     <div className="App">
