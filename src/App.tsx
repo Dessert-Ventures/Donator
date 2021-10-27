@@ -118,9 +118,15 @@ function App() {
       <header className="App-header">
         <img src={mlynoteka} className="App-logo" alt="logo" />
         <hr className="hrTag" />
+
         <h4 className="upperText">
-          Dziękujemy za zainteresowanie wsparciem naszej działaności
+          Dziękujemy za zainteresowanie wsparciem naszej działalności
         </h4>
+        {postErrors
+          ? `Error, please try again. Technical details: ${JSON.stringify(
+              postErrors
+            )}`
+          : null}
         <form onSubmit={handleSubmit} className="form">
           <label>
             <p>Email</p>
@@ -144,18 +150,9 @@ function App() {
           </label>
           <input type="submit" value="Donate" className="submitButton" />
         </form>
-        <hr className="hrTag" />
-        <h4 className="upperText">
-          Dziękujemy za zainteresowanie wsparciem naszej działaności
-        </h4>
-
-        {postErrors
-          ? `Error, please try again. Technical details: ${JSON.stringify(
-              postErrors
-            )}`
-          : null}
-
         {loading ? "Loading..." : null}
+        <hr className="hrTag" />
+        <h4 className="upperText">O NAS: DANE KONTAKTOWE</h4>
       </header>
     </div>
   )
