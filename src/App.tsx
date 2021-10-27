@@ -7,10 +7,12 @@ import mlynoteka from "./mlynoteka.svg"
 
 function App() {
   //Zamienic logo "MLYNOTEKA" na "TEATR MLYN"
-  // TODO: Prefill amount from URL param
+  const [loading, loadingSetter] = useState(false)
+  const [postError, postErrorSetter] = useState(false)
+
   const [email, emailSetter] = useState<string>("")
+  // TODO: Prefill amount from URL param
   const [amount, amountSetter] = useState<string>("10")
-  const [postError, postErrorSetter] = useState<string | undefined>()
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let newEmail: string = event.target.value
@@ -36,6 +38,8 @@ function App() {
   }
 
   const sendPostRequest = (amount: number, buyerEmail: string) => {
+    loadingSetter(true)
+
     const apiUrl =
       "https://cors-anywhere.herokuapp.com/https://api.sandbox.paynow.pl/v1/payments"
     const apiKey = "97a55694-5478-43b5-b406-fb49ebfdd2b5"
@@ -48,7 +52,7 @@ function App() {
       description: description,
       externalId: uuid(),
       buyer: { email: buyerEmail },
-      continueUrl: "/",
+      continueUrl: "https://mlyn.org", // TODO: Insert app URL here
     })
     const signature = CryptoJS.enc.Base64.stringify(
       CryptoJS.HmacSHA256(requestBody, apiSignatureKey)
@@ -69,14 +73,27 @@ function App() {
     fetch(apiUrl, requestOptions)
       .then((response) => response.json())
       .then(
-        (data: { redirectUrl: string; paymentId: string; status: string }) => {
-          const redirectUrl = data.redirectUrl
-          console.log(redirectUrl)
-          window.open(redirectUrl)
+        (data: {
+          redirectUrl: string
+          paymentId: string
+          status: string
+          errors?: []
+        }) => {
+          if (data.errors) {
+            console.warn(data)
+          } else {
+            console.debug(data)
+            const redirectUrl = data.redirectUrl
+            redirectUrl && window.open(redirectUrl)
+          }
         }
       )
       .catch((e) => {
-        postErrorSetter(JSON.stringify(e))
+        console.warn(e)
+        postErrorSetter(true)
+      })
+      .finally(() => {
+        loadingSetter(false)
       })
   }
 
@@ -108,7 +125,8 @@ function App() {
           <input type="submit" value="Donate" className="submitButton" />
         </form>
 
-        {postError}
+        {postError ? "Error, please try again" : null}
+        {loading ? "Loading..." : null}
       </header>
     </div>
   )
