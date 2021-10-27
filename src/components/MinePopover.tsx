@@ -33,17 +33,19 @@ export default function MinePopover() {
         open={open}
         anchorEl={anchorEl}
         anchorOrigin={{
-          vertical: "top",
+          vertical: "center",
           horizontal: "right",
         }}
         transformOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
+          vertical: "center",
+          horizontal: "left",
         }}
         onClose={handlePopoverClose}
         disableRestoreFocus
       >
-        <Typography sx={{ p: 1 }}>MORE INFO </Typography>
+        <Typography sx={{ p: 1 }}>
+          Email bedzie wykorzystywany w celu przeprowadzenia płatności
+        </Typography>
       </Popover>
     </div>
   )
