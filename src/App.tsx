@@ -24,17 +24,20 @@ function App() {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
-    let amountAsNumber = parseInt(amount)
-    if (isNaN(amountAsNumber)) {
+    let amountAsPaynowNumber = parseInt(amount) * 100 // in Polish grosz
+    if (isNaN(amountAsPaynowNumber)) {
       return
     }
 
-    console.log(`Submitting donation request with amount ${amount}`)
-    sendPostRequest(amountAsNumber, email)
+    console.log(
+      `Submitting donation request with amount ${amountAsPaynowNumber}`
+    )
+    sendPostRequest(amountAsPaynowNumber, email)
   }
 
   const sendPostRequest = (amount: number, buyerEmail: string) => {
-    const apiUrl = "https://api.sandbox.paynow.pl/v1/payments"
+    const apiUrl =
+      "https://cors-anywhere.herokuapp.com/https://api.sandbox.paynow.pl/v1/payments"
     const apiKey = "97a55694-5478-43b5-b406-fb49ebfdd2b5"
     const apiSignatureKey = "b305b996-bca5-4404-a0b7-2ccea3d2b64b"
 
@@ -45,6 +48,7 @@ function App() {
       description: description,
       externalId: uuid(),
       buyer: { email: buyerEmail },
+      continueUrl: "/",
     })
     const signature = CryptoJS.enc.Base64.stringify(
       CryptoJS.HmacSHA256(requestBody, apiSignatureKey)
@@ -64,7 +68,13 @@ function App() {
 
     fetch(apiUrl, requestOptions)
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then(
+        (data: { redirectUrl: string; paymentId: string; status: string }) => {
+          const redirectUrl = data.redirectUrl
+          console.log(redirectUrl)
+          window.open(redirectUrl)
+        }
+      )
       .catch((e) => {
         postErrorSetter(JSON.stringify(e))
       })
