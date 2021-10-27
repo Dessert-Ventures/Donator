@@ -13,13 +13,14 @@ const APP_URL = DEV_MODE
 function App() {
   //Zamienic logo "MLYNOTEKA" na "TEATR MLYN"
   const [loading, loadingSetter] = useState(false)
-  const [postError, postErrorSetter] = useState(false)
+  const [postErrors, postErrorsSetter] = useState<any[]>()
 
   const [email, emailSetter] = useState<string>("")
   // TODO: Prefill amount from URL param
   const [amount, amountSetter] = useState<string>("10")
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // TODO: Email input validation
     let newEmail: string = event.target.value
     emailSetter(newEmail)
   }
@@ -44,6 +45,7 @@ function App() {
 
   const sendPostRequest = (amount: number, buyerEmail: string) => {
     loadingSetter(true)
+    postErrorsSetter(undefined)
 
     const apiUrl =
       "https://cors-anywhere.herokuapp.com/https://api.sandbox.paynow.pl/v1/payments"
@@ -82,20 +84,23 @@ function App() {
           redirectUrl: string
           paymentId: string
           status: string
-          errors?: []
+          errors?: any[]
         }) => {
           if (data.errors) {
             console.warn(data)
+            postErrorsSetter(data.errors)
           } else {
             console.debug(data)
             const redirectUrl = data.redirectUrl
-            redirectUrl && window.open(redirectUrl)
+            if (redirectUrl) {
+              window.location.href = redirectUrl
+            }
           }
         }
       )
       .catch((e) => {
         console.warn(e)
-        postErrorSetter(true)
+        postErrorsSetter([e])
       })
       .finally(() => {
         loadingSetter(false)
@@ -135,7 +140,12 @@ function App() {
           <input type="submit" value="Donate" className="submitButton" />
         </form>
 
-        {postError ? "Error, please try again" : null}
+        {postErrors
+          ? `Error, please try again. Technical details: ${JSON.stringify(
+              postErrors
+            )}`
+          : null}
+
         {loading ? "Loading..." : null}
       </header>
     </div>
