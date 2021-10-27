@@ -15,10 +15,11 @@ function App() {
   //Zamienic logo "MLYNOTEKA" na "TEATR MLYN"
   const [loading, loadingSetter] = useState(false)
   const [postErrors, postErrorsSetter] = useState<any[]>()
+  const [paymentStatus, paymentStatusSetter] = useState<string>()
 
   const [email, emailSetter] = useState<string>("")
   // TODO: Prefill amount from URL param
-  const [amount, amountSetter] = useState<string>("10")
+  const [amount, amountSetter] = useState<string>("")
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // TODO: Email input validation
@@ -111,6 +112,13 @@ function App() {
   useEffect(() => {
     // TODO: Analytics
     DEV_MODE && console.debug("Donator running in dev mode")
+
+    const queryParams = new URLSearchParams(window.location.search)
+    const paymentStatus = queryParams.get("paymentStatus")
+    const amount = queryParams.get("amount")
+
+    paymentStatus && paymentStatusSetter(paymentStatus)
+    amount && amountSetter(amount)
   }, [])
 
   return (
@@ -121,6 +129,7 @@ function App() {
         <h4 className="upperText">
           Dziękujemy za zainteresowanie wsparciem naszej działaności
         </h4>
+        {paymentStatus ? `Payment Status: ${paymentStatus}` : null}
         <form onSubmit={handleSubmit} className="form">
           <label>
             <p>Email</p>
