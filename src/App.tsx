@@ -44,11 +44,9 @@ function App() {
 
     const emailIsValid = validateEmail(email)
     emailValidSetter(emailIsValid)
-    if (!emailIsValid) return
-
     const amountIsValid = validateAmount(amount)
     amountValidSetter(amountIsValid)
-    if (!amountIsValid) return
+    if (!emailIsValid || !amountIsValid) return
 
     let amountAsPaynowNumber = parseInt(amount) * 100 // in Polish grosz
 
