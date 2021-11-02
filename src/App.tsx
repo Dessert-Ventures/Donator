@@ -1,3 +1,8 @@
+import { ThemeProvider } from "@emotion/react"
+import Box from "@mui/material/Box"
+import Button from "@mui/material/Button"
+import { createTheme } from "@mui/material/styles"
+import TextField from "@mui/material/TextField"
 import CryptoJS from "crypto-js"
 import React, { useEffect, useState } from "react"
 import { v4 as uuid } from "uuid"
@@ -8,6 +13,33 @@ import mlynoteka from "./mlynoteka.svg"
 
 // TODO: Zamienic logo "MLYNOTEKA" na "TEATR MLYN"
 // TODO: i18n for PL-pl
+
+const theme = createTheme({
+  palette: {
+    neutral: {
+      main: "#000000",
+      contrastText: "#FFFFFF",
+    },
+  },
+})
+
+declare module "@mui/material/styles" {
+  interface Palette {
+    neutral: Palette["primary"]
+  }
+
+  // allow configuration using `createTheme`
+  interface PaletteOptions {
+    neutral?: PaletteOptions["primary"]
+  }
+}
+
+// Update the Button's color prop options
+declare module "@mui/material/Button" {
+  interface ButtonPropsColorOverrides {
+    neutral: true
+  }
+}
 
 const DEV_MODE = process.env.NODE_ENV === "development" || false
 const APP_URL = DEV_MODE
@@ -158,26 +190,70 @@ function App() {
               <span>Email</span>
               <MyPopover />
             </div>
-            <input
-              type="string"
-              name="email"
-              value={email}
-              onChange={handleEmailChange}
-              className={emailValid === false ? "invalid" : undefined}
-            />
+            {
+              <section>
+                {" "}
+                <Box
+                  component="span"
+                  sx={{
+                    "& > :not(style)": { m: 1, width: "20ch" },
+                  }}
+                  //autoComplete="off"
+                >
+                  <TextField
+                    size="small"
+                    id="email:"
+                    name="email"
+                    variant="outlined"
+                    value={email}
+                    onChange={handleEmailChange}
+                    helperText={emailValid === false ? "Invalid input" : ""}
+                    error={emailValid === false ? true : undefined}
+                  />
+                </Box>
+              </section>
+            }
           </label>
 
           <label>
             <p>Donation Amount [PLN]</p>
-            <input
-              type="number"
-              name="amount"
-              value={amount}
-              onChange={handleAmountChange}
-              className={amountValid === false ? "invalid" : undefined}
-            />
+
+            {
+              <section>
+                {" "}
+                <Box
+                  component="span"
+                  sx={{
+                    "& > :not(style)": { m: 1, width: "20ch" },
+                  }}
+                  //autoComplete="off"
+                >
+                  <TextField
+                    size="small"
+                    type="number"
+                    id="number:"
+                    name="number"
+                    variant="outlined"
+                    value={amount}
+                    onChange={handleAmountChange}
+                    helperText={amountValid === false ? "Invalid input" : ""}
+                    error={amountValid === false ? true : undefined}
+                  />
+                </Box>
+              </section>
+            }
           </label>
-          <input type="submit" value="Donate" className="submitButton" />
+          <ThemeProvider theme={theme}>
+            <Button
+              type="submit"
+              variant="contained"
+              size="medium"
+              className="submitMUIbutton"
+              color="neutral"
+            >
+              DONATE
+            </Button>
+          </ThemeProvider>
         </form>
         <hr className="hrTag" />
         {/* TODO: i18n */}
