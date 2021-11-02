@@ -9,7 +9,7 @@ import { v4 as uuid } from "uuid"
 import "./App.css"
 import MyPopover from "./components/MyPopover"
 import { validateAmount, validateEmail } from "./Helpers"
-import mlynoteka from "./mlynoteka.svg"
+import TeatrMlynLogo from "./TeatrMlynLogo.png"
 
 // TODO: Zamienic logo "MLYNOTEKA" na "TEATR MLYN"
 // TODO: i18n for PL-pl
@@ -162,7 +162,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={mlynoteka} className="App-logo" alt="logo" />
+        <img src={TeatrMlynLogo} className="App-logo" alt="logo" />
         <hr className="hrTag" />
         <h4 className="upperText">
           {/* TODO: i18n */}
