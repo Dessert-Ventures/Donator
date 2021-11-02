@@ -1,4 +1,6 @@
 import { ThemeProvider } from "@emotion/react"
+import FacebookIcon from "@mui/icons-material/Facebook"
+import InstagramIcon from "@mui/icons-material/Instagram"
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import { createTheme } from "@mui/material/styles"
@@ -256,8 +258,33 @@ function App() {
           </ThemeProvider>
         </form>
         <hr className="hrTag" />
+        <div className="footer">
+          <div>
+            <h4>TEATR MŁYN</h4>
+            <h6>Stołeczne Centrum Edukacji Kulturalnej</h6>
+            <h6>Scena Na Poddaszu III p.</h6>
+            <h6>ul. Jezuicka 4 Warszawa</h6>
+            <hr className="hrTag" />
+            <p>wspolfinansuje:</p>
+          </div>
+          <div>
+            <h4>KONTAKT</h4>
+            <h6>fundacjamlyn@gmail.com</h6>
+            <h6>promocja@fundacjamlyn.pl</h6>
+            <h6>rezerwacje@fundacjamlyn.pl</h6>
+            <h6>519 672 356</h6>
+            <hr className="hrTag" />
+          </div>
+          <div>
+            <h4>ZNAJDZIESZ NAS:</h4>
+            <InstagramIcon fontSize="large" style={{ cursor: "pointer" }} />
+            <FacebookIcon fontSize="large" style={{ cursor: "pointer" }} />
+            <hr className="hrTag" />
+            <p>Partnerzy teatru:</p>
+          </div>
+          {/* {<h4 className="upperText">O NAS: DANE KONTAKTOWE</h4>}  */}
+        </div>
         {/* TODO: i18n */}
-        <h4 className="upperText">O NAS: DANE KONTAKTOWE</h4>
       </header>
     </div>
   )
