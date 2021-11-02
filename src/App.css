@@ -50,3 +50,7 @@
   color: white;
   background-color: black;
 }
+
+.testEmail {
+  align-items: flex-start;
+}

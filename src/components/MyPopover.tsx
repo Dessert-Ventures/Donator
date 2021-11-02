@@ -24,7 +24,7 @@ export default function MyPopover() {
         onMouseEnter={handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
       >
-        <HelpOutlineIcon fontSize="small" />
+        <HelpOutlineIcon fontSize="small" color="action" />
       </Typography>
       <Popover
         id="mouse-over-popover"

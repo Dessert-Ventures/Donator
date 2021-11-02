@@ -132,12 +132,10 @@ function App() {
       <header className="App-header">
         <img src={mlynoteka} className="App-logo" alt="logo" />
         <hr className="hrTag" />
-
         <h4 className="upperText">
           {/* TODO: i18n */}
           Dziękujemy za zainteresowanie wsparciem naszej działalności!
         </h4>
-
         {loading ? "Loading..." : null}
         {paymentStatus ? `Payment Status: ${paymentStatus}` : null}
         {postErrors
@@ -148,8 +146,18 @@ function App() {
 
         <form onSubmit={handleSubmit} className="form">
           <label>
-            <p>Email</p>
-            <MyPopover />
+            <div
+              className="testEmail"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                flexWrap: "wrap",
+                justifyContent: "center",
+              }}
+            >
+              <span>Email</span>
+              <MyPopover />
+            </div>
             <input
               type="string"
               name="email"
@@ -171,7 +179,6 @@ function App() {
           </label>
           <input type="submit" value="Donate" className="submitButton" />
         </form>
-
         <hr className="hrTag" />
         {/* TODO: i18n */}
         <h4 className="upperText">O NAS: DANE KONTAKTOWE</h4>
