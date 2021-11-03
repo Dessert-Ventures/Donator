@@ -17,6 +17,14 @@
   align-items: center;
 }
 
+.form label {
+  padding-bottom: 1em;
+}
+
+.form button {
+  margin-top: 2em;
+}
+
 .invalid {
   background-color: red;
 }

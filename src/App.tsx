@@ -189,7 +189,7 @@ function App() {
                 justifyContent: "center",
               }}
             >
-              <span>Email</span>
+              <span style={{ paddingRight: ".3em" }}>Email</span>
               <MyPopover />
             </div>
             {
