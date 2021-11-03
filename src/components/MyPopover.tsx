@@ -45,7 +45,7 @@ export default function MyPopover() {
         disableRestoreFocus
       >
         <Typography sx={{ p: 1 }}>
-          Email bedzie wykorzystywany w celu przeprowadzenia płatności
+          Email zostanie wykorzystany włączeniu w celu przeprowadzenia płatności
           {/* TOOD: Make dynamic */}
         </Typography>
       </Popover>
