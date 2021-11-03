@@ -3,7 +3,7 @@ import Popover from "@mui/material/Popover"
 import Typography from "@mui/material/Typography"
 import * as React from "react"
 
-export default function MyPopover() {
+export default function MyPopover(props: { text: string }) {
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null)
 
   const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -44,10 +44,7 @@ export default function MyPopover() {
         onClose={handlePopoverClose}
         disableRestoreFocus
       >
-        <Typography sx={{ p: 1 }}>
-          Email zostanie wykorzystany włączeniu w celu przeprowadzenia płatności
-          {/* TOOD: Make dynamic */}
-        </Typography>
+        <Typography sx={{ p: 1, textAlign: "center" }}>{props.text}</Typography>
       </Popover>
     </div>
   )

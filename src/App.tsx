@@ -190,7 +190,7 @@ function App() {
               }}
             >
               <span style={{ paddingRight: ".3em" }}>Email</span>
-              <MyPopover />
+              <MyPopover text="Email zostanie wykorzystany wyłącznie w celu przeprowadzenia płatności" />
             </div>
             {
               <section>
