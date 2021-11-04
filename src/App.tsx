@@ -158,13 +158,14 @@ function App() {
   }
 
   useEffect(() => {
+    setCurrentLanguage("pl")
     // TODO: Analytics
     DEV_MODE && console.debug("Donator running in dev mode")
   }, [])
   const [currentLanguage, setCurrentLanguage] = useState<string | undefined>(
     "pl"
   )
-  const { t, i18n } = useTranslation()
+  const { i18n } = useTranslation()
   const changeLanguage = (language: string | undefined) => {
     i18n.changeLanguage(language)
     setCurrentLanguage(language)
