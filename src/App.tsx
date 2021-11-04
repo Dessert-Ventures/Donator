@@ -177,7 +177,13 @@ function App() {
       <button onClick={() => changeLanguage("en")}> EN</button>
 
       <header className="App-header">
-        <img src={TeatrMlynLogo} className="App-logo" alt="logo" />
+        <img
+          src={TeatrMlynLogo}
+          className="App-logo"
+          alt="logo"
+          style={{ cursor: "pointer" }}
+          onClick={() => window.open("https://google.com")}
+        />
         <hr className="hrTag" />
         <h4 className="upperText">
           {/* TODO: i18n */}

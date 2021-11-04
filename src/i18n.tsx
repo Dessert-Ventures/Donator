@@ -11,6 +11,7 @@ i18n
     lng: "pl",
     fallbackLng: "pl",
     debug: true,
+    supportedLngs: ["pl", "en"],
     detection: {
       order: ["queryString", "cookie"],
       caches: ["cookie"],
