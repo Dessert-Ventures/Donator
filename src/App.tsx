@@ -258,14 +258,14 @@ function App() {
           </ThemeProvider>
         </form>
         <hr className="hrTag" />
-        <div className="footer">
+        <footer className="footer">
           <div>
             <h4>TEATR MŁYN</h4>
             <h6>Stołeczne Centrum Edukacji Kulturalnej</h6>
             <h6>Scena Na Poddaszu III p.</h6>
             <h6>ul. Jezuicka 4 Warszawa</h6>
-            <hr className="hrTag" />
-            <p>wspolfinansuje:</p>
+            {/* <hr className="hrTag" /> */}
+            {/* <p>wspolfinansuje:</p> */}
           </div>
           <div>
             <h4>KONTAKT</h4>
@@ -273,17 +273,39 @@ function App() {
             <h6>promocja@fundacjamlyn.pl</h6>
             <h6>rezerwacje@fundacjamlyn.pl</h6>
             <h6>519 672 356</h6>
-            <hr className="hrTag" />
+            {/* <hr className="hrTag" /> */}
           </div>
           <div>
             <h4>ZNAJDZIESZ NAS:</h4>
-            <InstagramIcon fontSize="large" style={{ cursor: "pointer" }} />
-            <FacebookIcon fontSize="large" style={{ cursor: "pointer" }} />
-            <hr className="hrTag" />
-            <p>Partnerzy teatru:</p>
+
+            <InstagramIcon
+              fontSize="large"
+              style={{ cursor: "pointer" }}
+              onClick={() => window.open("https://google.com")}
+            />
+
+            <FacebookIcon
+              fontSize="large"
+              style={{ cursor: "pointer" }}
+              onClick={() => window.open("https://google.com")}
+            />
+            {/* <hr className="hrTag" /> */}
+            {/* <p>Partnerzy teatru:</p> */}
           </div>
+
           {/* {<h4 className="upperText">O NAS: DANE KONTAKTOWE</h4>}  */}
-        </div>
+        </footer>
+        <footer className="Lowerfooter">
+          <div>
+            <h4>Współfinansuje:</h4>
+          </div>
+
+          <div>
+            {" "}
+            <h4>Partnerzy teatru:</h4>
+          </div>
+        </footer>
+
         {/* TODO: i18n */}
       </header>
     </div>
