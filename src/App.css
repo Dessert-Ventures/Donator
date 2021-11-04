@@ -16,7 +16,9 @@
   flex-direction: column;
   align-items: center;
 }
-
+.upperText {
+  margin-top: 3em;
+}
 .form label {
   padding-bottom: 1em;
 }
