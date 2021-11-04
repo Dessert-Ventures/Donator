@@ -7,6 +7,7 @@ import { createTheme } from "@mui/material/styles"
 import TextField from "@mui/material/TextField"
 import CryptoJS from "crypto-js"
 import React, { useEffect, useState } from "react"
+import { Trans, useTranslation } from "react-i18next"
 import { v4 as uuid } from "uuid"
 import "./App.css"
 import MyPopover from "./components/MyPopover"
@@ -160,15 +161,29 @@ function App() {
     // TODO: Analytics
     DEV_MODE && console.debug("Donator running in dev mode")
   }, [])
+  const [currentLanguage, setCurrentLanguage] = useState<string | undefined>(
+    "pl"
+  )
+  const { t, i18n } = useTranslation()
+  const changeLanguage = (language: string | undefined) => {
+    i18n.changeLanguage(language)
+    setCurrentLanguage(language)
+  }
 
   return (
     <div className="App">
+      <button onClick={() => changeLanguage("pl")}>PL</button>
+      <button onClick={() => changeLanguage("en")}> EN</button>
+
       <header className="App-header">
         <img src={TeatrMlynLogo} className="App-logo" alt="logo" />
         <hr className="hrTag" />
         <h4 className="upperText">
           {/* TODO: i18n */}
-          Dziękujemy za zainteresowanie wsparciem naszej działalności!
+
+          <Trans i18nKey="title">
+            Dziękujemy za zainteresowanie wsparciem naszej działalności!
+          </Trans>
         </h4>
         {loading ? "Loading..." : null}
         {paymentStatus ? `Payment Status: ${paymentStatus}` : null}
@@ -190,7 +205,13 @@ function App() {
               }}
             >
               <span style={{ paddingRight: ".3em" }}>Email</span>
-              <MyPopover text="Email zostanie wykorzystany wyłącznie w celu przeprowadzenia płatności" />
+              <MyPopover
+                text={
+                  currentLanguage === "pl"
+                    ? "Email zostanie wykorzystany wyłącznie w celu przeprowadzenia płatności"
+                    : "The email will only be used to process the payment"
+                }
+              />
             </div>
             {
               <section>
@@ -218,7 +239,10 @@ function App() {
           </label>
 
           <label>
-            <p>Donation Amount [PLN]</p>
+            <p>
+              {" "}
+              <Trans i18nKey="DA">Kwota datku [PLN]</Trans>
+            </p>
 
             {
               <section>
@@ -253,7 +277,7 @@ function App() {
               className="submitMUIbutton"
               color="neutral"
             >
-              DONATE
+              <Trans i18nKey="Button">PRZEŚLIJ </Trans>
             </Button>
           </ThemeProvider>
         </form>
@@ -261,14 +285,29 @@ function App() {
         <footer className="footer">
           <div>
             <h4>TEATR MŁYN</h4>
-            <h6>Stołeczne Centrum Edukacji Kulturalnej</h6>
-            <h6>Scena Na Poddaszu III p.</h6>
-            <h6>ul. Jezuicka 4 Warszawa</h6>
-            {/* <hr className="hrTag" /> */}
-            {/* <p>wspolfinansuje:</p> */}
+            <h6>
+              {" "}
+              <Trans i18nKey="footer.description1.1">
+                Stołeczne Centrum Edukacji Kulturalnej
+              </Trans>
+            </h6>
+            <h6>
+              {" "}
+              <Trans i18nKey="footer.description1.2">
+                Scena Na Poddaszu III p.
+              </Trans>
+            </h6>
+            <h6>
+              <Trans i18nKey="footer.description1.3">
+                ul. Jezuicka 4 Warszawa
+              </Trans>
+            </h6>
           </div>
           <div>
-            <h4>KONTAKT</h4>
+            <h4>
+              {" "}
+              <Trans i18nKey="footer.Title2">KONTAKT</Trans>
+            </h4>
             <h6>fundacjamlyn@gmail.com</h6>
             <h6>promocja@fundacjamlyn.pl</h6>
             <h6>rezerwacje@fundacjamlyn.pl</h6>
@@ -276,7 +315,10 @@ function App() {
             {/* <hr className="hrTag" /> */}
           </div>
           <div>
-            <h4>ZNAJDZIESZ NAS:</h4>
+            <h4>
+              {" "}
+              <Trans i18nKey="footer.Title3">ZNAJDZIESZ NAS:</Trans>
+            </h4>
 
             <InstagramIcon
               fontSize="large"
@@ -297,12 +339,17 @@ function App() {
         </footer>
         <footer className="Lowerfooter">
           <div>
-            <h4>Współfinansuje:</h4>
+            <h4>
+              {" "}
+              <Trans i18nKey="footer.Title4">Współfinansuje: </Trans>
+            </h4>
           </div>
 
           <div>
-            {" "}
-            <h4>Partnerzy teatru:</h4>
+            <h4>
+              {" "}
+              <Trans i18nKey="footer.Title5">Partnerzy teatru: </Trans>
+            </h4>
           </div>
         </footer>
 
