@@ -116,7 +116,9 @@
   height: 65.5px;
   position: relative;
   display: flex;
-  width: 100%;
+  /* width: 100%; */
+  width: 177.438px;
+
   margin-bottom: 1em;
 }
 .partner-logo1 {
