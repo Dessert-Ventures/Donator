@@ -10,14 +10,12 @@ import React, { useEffect, useState } from "react"
 import { Trans, useTranslation } from "react-i18next"
 import { v4 as uuid } from "uuid"
 import "./App.css"
+import dzienDobryWarszawo from "./assets/dzienDobryWarszawo.png"
+import scek2 from "./assets/scek2.jpg"
+import TeatrMlynLogo from "./assets/TeatrMlynLogo.png"
+import zakochajSiewWarszawie from "./assets/zakochajSiewWarszawie.jpg"
 import MyPopover from "./components/MyPopover"
-import dzienDobryWarszawo from "./dzienDobryWarszawo.png"
 import { validateAmount, validateEmail } from "./Helpers"
-import scek2 from "./scek2.jpg"
-import TeatrMlynLogo from "./TeatrMlynLogo.png"
-import zakochajSiewWarszawie from "./zakochajSiewWarszawie.jpg"
-// TODO: Zamienic logo "MLYNOTEKA" na "TEATR MLYN"
-// TODO: i18n for PL-pl
 
 const theme = createTheme({
   palette: {
