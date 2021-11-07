@@ -1,12 +1,13 @@
 import React, { Suspense } from "react"
 import ReactDOM from "react-dom"
 import App from "./App"
+import Spinner from "./components/Spinner"
 import "./i18n"
 import "./index.css"
 import reportWebVitals from "./reportWebVitals"
 ReactDOM.render(
   <React.StrictMode>
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Spinner />}>
       <App />
     </Suspense>
   </React.StrictMode>,
