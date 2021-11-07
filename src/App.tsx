@@ -14,8 +14,8 @@ import dzienDobryWarszawo from "./assets/dzienDobryWarszawo.png"
 import scek2 from "./assets/scek2.jpg"
 import TeatrMlynLogo from "./assets/TeatrMlynLogo.png"
 import zakochajSiewWarszawie from "./assets/zakochajSiewWarszawie.jpg"
+import { validateAmount, validateEmail } from "./common/Helpers"
 import MyPopover from "./components/MyPopover"
-import { validateAmount, validateEmail } from "./Helpers"
 
 const theme = createTheme({
   palette: {
