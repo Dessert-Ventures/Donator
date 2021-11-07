@@ -162,6 +162,7 @@ function App() {
     // TODO: Analytics
     DEV_MODE && console.debug("Donator running in dev mode")
   }, [])
+
   const [currentLanguage, setCurrentLanguage] = useState<string | undefined>(
     "pl"
   )
@@ -186,8 +187,6 @@ function App() {
         />
         <hr className="hrTag" />
         <h4 className="upperText">
-          {/* TODO: i18n */}
-
           <Trans i18nKey="title">
             Dziękujemy za zainteresowanie wsparciem naszej działalności!
           </Trans>
@@ -228,7 +227,6 @@ function App() {
                   sx={{
                     "& > :not(style)": { m: 1, width: "20ch" },
                   }}
-                  //autoComplete="off"
                 >
                   <TextField
                     size="small"
@@ -237,7 +235,13 @@ function App() {
                     variant="outlined"
                     value={email}
                     onChange={handleEmailChange}
-                    helperText={emailValid === false ? "Invalid input" : ""}
+                    helperText={
+                      emailValid === false
+                        ? currentLanguage === "pl"
+                          ? "Niepoprawna wartość"
+                          : "Invalid input"
+                        : ""
+                    }
                     error={emailValid === false ? true : undefined}
                   />
                 </Box>
@@ -248,7 +252,7 @@ function App() {
           <label>
             <p>
               {" "}
-              <Trans i18nKey="DA">Kwota datku [PLN]</Trans>
+              <Trans i18nKey="DA">Kwota (zł)</Trans>
             </p>
 
             {
@@ -259,7 +263,6 @@ function App() {
                   sx={{
                     "& > :not(style)": { m: 1, width: "20ch" },
                   }}
-                  //autoComplete="off"
                 >
                   <TextField
                     size="small"
@@ -269,7 +272,13 @@ function App() {
                     variant="outlined"
                     value={amount}
                     onChange={handleAmountChange}
-                    helperText={amountValid === false ? "Invalid input" : ""}
+                    helperText={
+                      amountValid === false
+                        ? currentLanguage === "pl"
+                          ? "Niepoprawna wartość"
+                          : "Invalid input"
+                        : ""
+                    }
                     error={amountValid === false ? true : undefined}
                   />
                 </Box>
