@@ -11,9 +11,11 @@ import { Trans, useTranslation } from "react-i18next"
 import { v4 as uuid } from "uuid"
 import "./App.css"
 import MyPopover from "./components/MyPopover"
+import dzienDobryWarszawo from "./dzienDobryWarszawo.png"
 import { validateAmount, validateEmail } from "./Helpers"
+import scek2 from "./scek2.jpg"
 import TeatrMlynLogo from "./TeatrMlynLogo.png"
-
+import zakochajSiewWarszawie from "./zakochajSiewWarszawie.jpg"
 // TODO: Zamienic logo "MLYNOTEKA" na "TEATR MLYN"
 // TODO: i18n for PL-pl
 
@@ -182,7 +184,7 @@ function App() {
           className="App-logo"
           alt="logo"
           style={{ cursor: "pointer" }}
-          onClick={() => window.open("https://google.com")}
+          onClick={() => window.open("https://mlyn.org/")}
         />
         <hr className="hrTag" />
         <h4 className="upperText">
@@ -326,30 +328,47 @@ function App() {
               {" "}
               <Trans i18nKey="footer.Title3">ZNAJDZIESZ NAS:</Trans>
             </h4>
+            <section className="testt">
+              <InstagramIcon
+                fontSize="large"
+                style={{ cursor: "pointer" }}
+                onClick={() =>
+                  window.open("https://www.instagram.com/teatrmlyn/")
+                }
+              />
+            </section>
+            <section className="testt">
+              <FacebookIcon
+                fontSize="large"
+                style={{ cursor: "pointer" }}
+                onClick={() =>
+                  window.open(
+                    "https://www.facebook.com/fundacja.artystyczna.mlyn"
+                  )
+                }
+              />
+            </section>
 
-            <InstagramIcon
-              fontSize="large"
-              style={{ cursor: "pointer" }}
-              onClick={() => window.open("https://google.com")}
-            />
-
-            <FacebookIcon
-              fontSize="large"
-              style={{ cursor: "pointer" }}
-              onClick={() => window.open("https://google.com")}
-            />
             {/* <hr className="hrTag" /> */}
             {/* <p>Partnerzy teatru:</p> */}
           </div>
 
           {/* {<h4 className="upperText">O NAS: DANE KONTAKTOWE</h4>}  */}
         </footer>
+
         <footer className="Lowerfooter">
           <div>
             <h4>
               {" "}
               <Trans i18nKey="footer.Title4">Współfinansuje: </Trans>
             </h4>
+            <img
+              src={zakochajSiewWarszawie}
+              className="partner-logo1"
+              alt="logo"
+              style={{ cursor: "pointer" }}
+              onClick={() => window.open("https://um.warszawa.pl/")}
+            />
           </div>
 
           <div>
@@ -357,6 +376,20 @@ function App() {
               {" "}
               <Trans i18nKey="footer.Title5">Partnerzy teatru: </Trans>
             </h4>
+            <img
+              src={scek2}
+              className="partner-logo"
+              alt="logo"
+              style={{ cursor: "pointer" }}
+              onClick={() => window.open("https://scek.pl/")}
+            />
+            <img
+              src={dzienDobryWarszawo}
+              className="partner-logo"
+              alt="logo"
+              style={{ cursor: "pointer" }}
+              onClick={() => window.open("https://www.dziendobrywarszawo.pl/")}
+            />
           </div>
         </footer>
 

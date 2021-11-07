@@ -54,11 +54,12 @@
   flex-direction: row;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .footer div {
-  margin: 0em 6em;
+  margin: 0em 5em;
+  position: relative;
 }
 
 .footer h4 {
@@ -95,7 +96,7 @@
   flex-direction: row;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .Lowerfooter h4 {
@@ -108,5 +109,29 @@
 }
 
 .Lowerfooter div {
-  margin: 0em 10em;
+  margin: 0em 5em;
+}
+
+.partner-logo {
+  height: 65.5px;
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin-bottom: 1em;
+}
+.partner-logo1 {
+  height: 65.5px;
+  position: relative;
+  display: flex;
+  margin-bottom: 1em;
+  /* width: 100px; */
+}
+
+.testt :hover {
+  color: grey;
+}
+.testt {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
