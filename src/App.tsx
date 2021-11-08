@@ -112,9 +112,12 @@ function App() {
     const apiUrl =
       "https://dv-cors-anywhere.herokuapp.com/https://api.sandbox.paynow.pl/v1/payments"
 
-    // TODO: Set to production keys
-    const apiKey = "656990db-76e1-4980-95a5-4601e82b558d"
-    const apiSignatureKey = "7608a0f4-a923-4c5a-a644-bf00eb3bd769"
+    // IMPROVEMENT: Keep production keys on server and not in frontend env, for security
+    const apiKey =
+      process.env.REACT_APP_API_KEY ?? "656990db-76e1-4980-95a5-4601e82b558d"
+    const apiSignatureKey =
+      process.env.REACT_APP_API_SIGNATURE_KEY ??
+      "7608a0f4-a923-4c5a-a644-bf00eb3bd769"
 
     const description = "Darowizna"
 
