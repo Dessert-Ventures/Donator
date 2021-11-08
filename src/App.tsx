@@ -176,6 +176,7 @@ function App() {
 
     const TRACKING_ID = "UA-207896383-1"
     ReactGA.initialize(TRACKING_ID)
+    ReactGA.pageview(window.location.pathname + window.location.search)
 
     DEV_MODE && console.debug("Donator running in dev mode")
   }, [])
