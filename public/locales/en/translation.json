@@ -3,6 +3,7 @@
   "emailNeededExplanation": "Your email address will only be used to process the payment",
   "invalidInput": "Invalid input",
   "Loading...": "Loading...",
+  "Error, please try again. Technical details:": "Error, please try again. Technical details:",
   "DA": "Amount (PLN)",
   "Button": "DONATE",
   "footer": {
