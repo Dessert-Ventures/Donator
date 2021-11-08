@@ -42,3 +42,7 @@ CDN: Netlify
 
 Analytics: GA
 - https://analytics.google.com/analytics/web/#/report-home/a207896383w292643799p254801037
+
+CORS: Forked CORS-Anywhere
+- https://github.com/Dessert-Ventures/cors-anywhere
+- https://dashboard.heroku.com/apps/dv-cors-anywhere/deploy/github
