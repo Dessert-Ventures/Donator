@@ -7,6 +7,7 @@ import { createTheme } from "@mui/material/styles"
 import TextField from "@mui/material/TextField"
 import CryptoJS from "crypto-js"
 import React, { useEffect, useState } from "react"
+import ReactGA from "react-ga"
 import { Trans, useTranslation } from "react-i18next"
 import { v4 as uuid } from "uuid"
 import "./App.css"
@@ -45,9 +46,7 @@ declare module "@mui/material/Button" {
 }
 
 const DEV_MODE = process.env.NODE_ENV === "development" || false
-const APP_URL = DEV_MODE
-  ? "http://localhost:3000"
-  : "https://mlyndonator.netlify.app" // TODO: Use final domain URL
+const APP_URL = DEV_MODE ? "http://localhost:3000" : "https://wesprzyj.mlyn.org"
 
 const QUERY_PARAMS = new URLSearchParams(window.location.search)
 const QUERY_PARAMS_PAYMENT_STATUS = QUERY_PARAMS.get("paymentStatus")
@@ -81,14 +80,29 @@ function App() {
     emailValidSetter(emailIsValid)
     const amountIsValid = validateAmount(amount)
     amountValidSetter(amountIsValid)
-    if (!emailIsValid || !amountIsValid) return
 
-    let amountAsPaynowNumber = parseInt(amount) * 100 // in Polish grosz
+    if (!emailIsValid || !amountIsValid) {
+      ReactGA.event({
+        category: "User",
+        action: "Pressed Donate",
+        label: "Validation Failed",
+        value: parseInt(amount),
+      })
+    } else {
+      let amountAsPaynowNumber = parseInt(amount) * 100 // in Polish grosz
 
-    console.log(
-      `Submitting donation request with amount ${amountAsPaynowNumber}`
-    )
-    sendPostRequest(amountAsPaynowNumber, email)
+      ReactGA.event({
+        category: "User",
+        action: "Pressed Donate",
+        label: "Validation Passed",
+        value: parseInt(amount),
+      })
+
+      console.log(
+        `Submitting donation request with amount ${amountAsPaynowNumber}`
+      )
+      sendPostRequest(amountAsPaynowNumber, email)
+    }
   }
 
   const sendPostRequest = (amount: number, buyerEmail: string) => {
@@ -159,24 +173,23 @@ function App() {
 
   useEffect(() => {
     setCurrentLanguage("pl")
-    // TODO: Analytics
+
+    const TRACKING_ID = "UA-207896383-1"
+    ReactGA.initialize(TRACKING_ID)
+
     DEV_MODE && console.debug("Donator running in dev mode")
   }, [])
 
-  const [currentLanguage, setCurrentLanguage] = useState<string | undefined>(
-    "pl"
-  )
+  const [currentLanguage, setCurrentLanguage] = useState("pl")
   const { i18n } = useTranslation()
-  const changeLanguage = (language: string | undefined) => {
-    i18n.changeLanguage(language)
-    setCurrentLanguage(language)
+  const toggleLanguage = () => {
+    const newLanguage = currentLanguage === "pl" ? "en" : "pl"
+    i18n.changeLanguage(newLanguage)
+    setCurrentLanguage(newLanguage)
   }
 
   return (
     <div className="App">
-      <button onClick={() => changeLanguage("pl")}>PL</button>
-      <button onClick={() => changeLanguage("en")}> EN</button>
-
       <header className="App-header">
         <img
           src={TeatrMlynLogo}
@@ -187,12 +200,10 @@ function App() {
         />
         <hr className="hrTag" />
         <h4 className="upperText">
-          <Trans i18nKey="title">
-            Dziękujemy za zainteresowanie wsparciem naszej działalności!
-          </Trans>
+          <Trans i18nKey="title"></Trans>
         </h4>
         {loading ? "Loading..." : null}
-        {paymentStatus ? `Payment Status: ${paymentStatus}` : null}
+        {paymentStatus ? `Status: ${paymentStatus}` : null}
         {postErrors
           ? `Error, please try again. Technical details: ${JSON.stringify(
               postErrors
@@ -298,6 +309,9 @@ function App() {
           </ThemeProvider>
         </form>
         <hr className="hrTag" />
+        <button onClick={toggleLanguage}>
+          {currentLanguage === "pl" ? "English" : "Polski"}
+        </button>
         <footer className="footer">
           <div>
             <h4>TEATR MŁYN</h4>
@@ -399,8 +413,6 @@ function App() {
             />
           </div>
         </footer>
-
-        {/* TODO: i18n */}
       </header>
     </div>
   )
