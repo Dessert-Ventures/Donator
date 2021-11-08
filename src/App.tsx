@@ -183,6 +183,8 @@ function App() {
     ReactGA.initialize(TRACKING_ID)
     ReactGA.pageview(window.location.pathname + window.location.search)
 
+    // IMPROVEMENT: Add crash reporting
+
     DEV_MODE && console.debug("Donator running in dev mode")
   }, [])
 
