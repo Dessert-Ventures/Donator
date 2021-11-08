@@ -17,6 +17,7 @@
     "Title5": "PARTNERZY"
   },
   "paymentStatus": "Status płatności",
-  "CONFIRMED": "Sukces",
-  "ERROR": "Błąd"
+  "CONFIRMED": "Zakończona powodzeniem. Dziękujemy!",
+  "ERROR": "Błąd. Prosimy spróbowac ponownie.",
+  "Continue": "Dalej"
 }

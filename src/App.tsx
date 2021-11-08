@@ -73,6 +73,10 @@ function App() {
     amountSetter(newAmount)
   }
 
+  const handlePaymentStatusViewed = () => {
+    window.location.href = "/"
+  }
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
 
@@ -175,8 +179,6 @@ function App() {
   }
 
   useEffect(() => {
-    setCurrentLanguage("pl")
-
     const TRACKING_ID = "UA-207896383-1"
     ReactGA.initialize(TRACKING_ID)
     ReactGA.pageview(window.location.pathname + window.location.search)
@@ -194,8 +196,9 @@ function App() {
     }
   }, [paymentStatus])
 
-  const [currentLanguage, setCurrentLanguage] = useState("pl")
   const { t, i18n } = useTranslation()
+  const [currentLanguage, setCurrentLanguage] = useState(i18n.resolvedLanguage)
+
   const toggleLanguage = () => {
     const newLanguage = currentLanguage === "pl" ? "en" : "pl"
     i18n.changeLanguage(newLanguage)
@@ -203,27 +206,20 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img
-          src={TeatrMlynLogo}
-          className="App-logo"
-          alt="logo"
-          style={{ cursor: "pointer" }}
-          onClick={() => window.open("https://mlyn.org/")}
-        />
-        <hr className="hrTag" />
-        <h4 className="upperText">
-          <Trans i18nKey="title"></Trans>
-        </h4>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <header className="App-header">
+          <img
+            src={TeatrMlynLogo}
+            className="App-logo"
+            alt="logo"
+            style={{ cursor: "pointer" }}
+            onClick={() => window.open("https://mlyn.org/")}
+          />
+          <hr className="hrTag" />
+        </header>
 
         {loading ? <div>{t("Loading...")}</div> : null}
-
-        {paymentStatus ? (
-          <div className="paymentStatus">{`${t("paymentStatus")}: ${t(
-            paymentStatus
-          )}`}</div>
-        ) : null}
 
         {postErrors ? (
           <div>
@@ -232,92 +228,123 @@ function App() {
           </div>
         ) : null}
 
-        <form onSubmit={handleSubmit} className="form">
-          <label>
-            <div
-              className="testEmail"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                flexWrap: "wrap",
-                justifyContent: "center",
-              }}
-            >
-              <span style={{ paddingRight: ".3em" }}>Email</span>
-              <MyPopover text={t("emailNeededExplanation")} />
-            </div>
-            {
-              <section>
-                {" "}
-                <Box
-                  component="span"
-                  sx={{
-                    "& > :not(style)": { m: 1, width: "20ch" },
-                  }}
-                >
-                  <TextField
-                    size="small"
-                    id="email:"
-                    name="email"
-                    variant="outlined"
-                    value={email}
-                    onChange={handleEmailChange}
-                    helperText={emailValid === false ? t("invalidInput") : ""}
-                    error={emailValid === false ? true : undefined}
-                  />
-                </Box>
-              </section>
-            }
-          </label>
+        {paymentStatus ? (
+          <div className="paymentStatus">
+            <div>{`${t("paymentStatus")}: ${t(paymentStatus)}`}</div>
 
-          <label>
-            <p>
-              {" "}
-              <Trans i18nKey="DA"></Trans>
-            </p>
-
-            {
-              <section>
-                {" "}
-                <Box
-                  component="span"
-                  sx={{
-                    "& > :not(style)": { m: 1, width: "20ch" },
-                  }}
-                >
-                  <TextField
-                    size="small"
-                    type="number"
-                    id="number:"
-                    name="number"
-                    variant="outlined"
-                    value={amount}
-                    onChange={handleAmountChange}
-                    helperText={amountValid === false ? t("invalidInput") : ""}
-                    error={amountValid === false ? true : undefined}
-                  />
-                </Box>
-              </section>
-            }
-          </label>
-          <ThemeProvider theme={theme}>
             <Button
-              type="submit"
+              onClick={handlePaymentStatusViewed}
               variant="contained"
               size="medium"
-              className="submitMUIbutton"
               color="neutral"
+              className="continueButton"
             >
-              <Trans i18nKey="Button"></Trans>
+              <Trans i18nKey="Continue"></Trans>
             </Button>
-          </ThemeProvider>
-        </form>
+          </div>
+        ) : (
+          <div>
+            <h4 className="upperText">
+              <Trans i18nKey="title"></Trans>
+            </h4>
+
+            <form onSubmit={handleSubmit} className="form">
+              <label>
+                <div
+                  className="testEmail"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                  }}
+                >
+                  <span style={{ paddingRight: ".3em" }}>Email</span>
+                  <MyPopover text={t("emailNeededExplanation")} />
+                </div>
+                {
+                  <section>
+                    {" "}
+                    <Box
+                      component="span"
+                      sx={{
+                        "& > :not(style)": { m: 1, width: "20ch" },
+                      }}
+                    >
+                      <TextField
+                        size="small"
+                        id="email:"
+                        name="email"
+                        variant="outlined"
+                        value={email}
+                        onChange={handleEmailChange}
+                        helperText={
+                          emailValid === false ? t("invalidInput") : ""
+                        }
+                        error={emailValid === false ? true : undefined}
+                      />
+                    </Box>
+                  </section>
+                }
+              </label>
+
+              <label>
+                <p>
+                  {" "}
+                  <Trans i18nKey="DA"></Trans>
+                </p>
+
+                {
+                  <section>
+                    {" "}
+                    <Box
+                      component="span"
+                      sx={{
+                        "& > :not(style)": { m: 1, width: "20ch" },
+                      }}
+                    >
+                      <TextField
+                        size="small"
+                        type="number"
+                        id="number:"
+                        name="number"
+                        variant="outlined"
+                        value={amount}
+                        onChange={handleAmountChange}
+                        helperText={
+                          amountValid === false ? t("invalidInput") : ""
+                        }
+                        error={amountValid === false ? true : undefined}
+                      />
+                    </Box>
+                  </section>
+                }
+              </label>
+              <Button
+                type="submit"
+                variant="contained"
+                size="medium"
+                className="submitMUIbutton"
+                color="neutral"
+              >
+                <Trans i18nKey="Button"></Trans>
+              </Button>
+            </form>
+          </div>
+        )}
 
         <hr className="hrTag" />
 
-        <button onClick={toggleLanguage}>
+        <Button
+          onClick={toggleLanguage}
+          variant="contained"
+          size="small"
+          color="neutral"
+          className="toggleLanguageButton"
+        >
           {currentLanguage === "pl" ? "English" : "Polski"}
-        </button>
+        </Button>
+
         <br />
         <br />
 
@@ -410,8 +437,8 @@ function App() {
             />
           </div>
         </footer>
-      </header>
-    </div>
+      </div>
+    </ThemeProvider>
   )
 }
 

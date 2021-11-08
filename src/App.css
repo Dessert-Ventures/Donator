@@ -40,9 +40,15 @@
   margin: 1em;
   width: 12em;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
-  background-color: black;
-  color: black;
   font-weight: 500;
+}
+
+/* IMPROVEMENT: Use MUI themes instead */
+.toggleLanguageButton {
+  background-color: #a9a9a9 !important;
+}
+.continueButton {
+  margin-top: 2em !important;
 }
 
 .testEmail {
