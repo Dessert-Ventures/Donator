@@ -11,7 +11,7 @@
 }
 
 .form {
-  padding: 1em 0em 5em 0em;
+  padding: 1em 0em 2em 0em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,8 +67,9 @@
   font-family: Oswald, sans-serif;
   /* font-size: 25px; */
   font-weight: 400;
-  text-align: left;
+  text-align: center;
   position: relative;
+  margin-top: 4em;
 }
 
 .footer h6 {
@@ -105,8 +106,9 @@
   font-family: Oswald, sans-serif;
   /* font-size: 25px; */
   font-weight: 400;
-  text-align: left;
+  text-align: center;
   position: relative;
+  margin-top: 4em;
 }
 
 .Lowerfooter div {
@@ -125,8 +127,10 @@
 .partner-logo1 {
   height: 65.5px;
   position: relative;
-  display: flex;
+  display: block;
   margin-bottom: 1em;
+  margin-left: auto;
+  margin-right: auto;
   /* width: 100px; */
 }
 
