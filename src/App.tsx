@@ -203,12 +203,17 @@ function App() {
         <h4 className="upperText">
           <Trans i18nKey="title"></Trans>
         </h4>
-        {loading ? t("Loading...") : null}
-        {paymentStatus ? `Status: ${paymentStatus}` : null}
-        {postErrors
-          ? t("Error, please try again. Technical details:") +
-            ` ${JSON.stringify(postErrors)}`
-          : null}
+
+        {loading ? <div>{t("Loading...")}</div> : null}
+
+        {paymentStatus ? <div>{`Status: ${paymentStatus}`}</div> : null}
+
+        {postErrors ? (
+          <div>
+            {t("Error, please try again. Technical details:") +
+              ` ${JSON.stringify(postErrors)}`}
+          </div>
+        ) : null}
 
         <form onSubmit={handleSubmit} className="form">
           <label>
