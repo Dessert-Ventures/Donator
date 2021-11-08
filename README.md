@@ -1,8 +1,10 @@
 # Welcome to Donator
 
-Made for Teatr Młyn:
-- https://mlyn.org/
-- https://mlynoteka.mlyn.org/
+This app allows for simple donations and serves as a bridge between your organisation (e.g. a piece of content) and a payment gateway (currently Paynow.pl).
+
+## Usage
+
+Pre-set amount to donate: Append the URL param `amount=50`.
 
 ## Available Scripts
 
@@ -24,8 +26,16 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-## Production Version
+## Deployed Versions
 
-Uses Netlify pointing to `master` branch (https://app.netlify.com/sites/mlyndonator/overview).
+### Młyn: `mlyndonator`
 
-Latest build: https://mlyndonator.netlify.app/.
+Organisation: Teatr Młyn
+- https://mlyn.org
+- https://mlynoteka.mlyn.org
+
+CDN: Netlify
+- Config: https://app.netlify.com/sites/mlyndonator/overview
+  - Points to `master` branch
+  - Latest master build: https://mlyndonator.netlify.app
+- Production domain: http://wesprzyj.mlyn.org
