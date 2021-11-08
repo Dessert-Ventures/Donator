@@ -39,3 +39,6 @@ CDN: Netlify
   - Points to `master` branch
   - Latest master build: https://mlyndonator.netlify.app
 - Production domain: http://wesprzyj.mlyn.org
+
+Analytics: GA
+- https://analytics.google.com/analytics/web/#/report-home/a207896383w292643799p254801037
