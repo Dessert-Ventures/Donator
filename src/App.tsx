@@ -181,7 +181,7 @@ function App() {
   }, [])
 
   const [currentLanguage, setCurrentLanguage] = useState("pl")
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
   const toggleLanguage = () => {
     const newLanguage = currentLanguage === "pl" ? "en" : "pl"
     i18n.changeLanguage(newLanguage)
@@ -202,7 +202,7 @@ function App() {
         <h4 className="upperText">
           <Trans i18nKey="title"></Trans>
         </h4>
-        {loading ? "Loading..." : null}
+        {loading ? t("Loading...") : null}
         {paymentStatus ? `Status: ${paymentStatus}` : null}
         {postErrors
           ? `Error, please try again. Technical details: ${JSON.stringify(
@@ -246,13 +246,7 @@ function App() {
                     variant="outlined"
                     value={email}
                     onChange={handleEmailChange}
-                    helperText={
-                      emailValid === false
-                        ? currentLanguage === "pl"
-                          ? "Niepoprawna wartość"
-                          : "Invalid input"
-                        : ""
-                    }
+                    helperText={emailValid === false ? t("invalidInput") : ""}
                     error={emailValid === false ? true : undefined}
                   />
                 </Box>
@@ -263,7 +257,7 @@ function App() {
           <label>
             <p>
               {" "}
-              <Trans i18nKey="DA">Kwota (zł)</Trans>
+              <Trans i18nKey="DA"></Trans>
             </p>
 
             {
@@ -283,13 +277,7 @@ function App() {
                     variant="outlined"
                     value={amount}
                     onChange={handleAmountChange}
-                    helperText={
-                      amountValid === false
-                        ? currentLanguage === "pl"
-                          ? "Niepoprawna wartość"
-                          : "Invalid input"
-                        : ""
-                    }
+                    helperText={amountValid === false ? t("invalidInput") : ""}
                     error={amountValid === false ? true : undefined}
                   />
                 </Box>

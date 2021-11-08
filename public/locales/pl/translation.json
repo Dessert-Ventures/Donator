@@ -1,6 +1,7 @@
 {
   "title": "Dziękujemy za zainteresowanie wsparciem naszej działalności!",
   "questionMark": "Email zostanie wykorzystany wyłącznie w celu przeprowadzenia płatności",
+  "invalidInput": "Niepoprawna wartość",
   "DA": "Kwota (zł)",
   "Button": "WESPRZYJ",
   "footer": {

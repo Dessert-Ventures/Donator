@@ -1,6 +1,7 @@
 {
   "title": "Thank you for your interest in supporting us!",
   "questionMark": "Your email address will only be used to process the payment",
+  "invalidInput": "Invalid input",
   "DA": "Amount (PLN)",
   "Button": "DONATE",
   "footer": {
