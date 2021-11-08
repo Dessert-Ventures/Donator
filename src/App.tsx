@@ -110,7 +110,7 @@ function App() {
     postErrorsSetter(undefined)
 
     const apiUrl =
-      "https://cors-anywhere.herokuapp.com/https://api.sandbox.paynow.pl/v1/payments" // TODO: Self-host; https://cors-anywhere.herokuapp.com/corsdemo
+      "https://dv-cors-anywhere.herokuapp.com/https://api.sandbox.paynow.pl/v1/payments"
 
     // TODO: Set to production keys
     const apiKey = "97a55694-5478-43b5-b406-fb49ebfdd2b5"
