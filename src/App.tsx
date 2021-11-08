@@ -181,6 +181,16 @@ function App() {
     DEV_MODE && console.debug("Donator running in dev mode")
   }, [])
 
+  useEffect(() => {
+    if (paymentStatus) {
+      ReactGA.event({
+        category: "User",
+        action: "Returned to App after Donation",
+        label: paymentStatus,
+      })
+    }
+  }, [paymentStatus])
+
   const [currentLanguage, setCurrentLanguage] = useState("pl")
   const { t, i18n } = useTranslation()
   const toggleLanguage = () => {
