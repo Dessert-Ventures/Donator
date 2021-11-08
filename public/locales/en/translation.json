@@ -15,5 +15,8 @@
     "description1.3": "Jezuicka 4 Street Warsaw",
     "Title4": "SPONSORS",
     "Title5": "PARTNERS"
-  }
+  },
+  "paymentStatus": "Payment status",
+  "CONFIRMED": "Successful",
+  "ERROR": "Error"
 }

@@ -15,5 +15,8 @@
     "description1.3": "ul. Jezuicka 4 Warszawa",
     "Title4": "WSPÓŁFINANSUJĄ",
     "Title5": "PARTNERZY"
-  }
+  },
+  "paymentStatus": "Status płatności",
+  "CONFIRMED": "Sukces",
+  "ERROR": "Błąd"
 }

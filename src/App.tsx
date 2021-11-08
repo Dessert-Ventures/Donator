@@ -216,7 +216,11 @@ function App() {
 
         {loading ? <div>{t("Loading...")}</div> : null}
 
-        {paymentStatus ? <div>{`Status: ${paymentStatus}`}</div> : null}
+        {paymentStatus ? (
+          <div className="paymentStatus">{`${t("paymentStatus")}: ${t(
+            paymentStatus
+          )}`}</div>
+        ) : null}
 
         {postErrors ? (
           <div>
