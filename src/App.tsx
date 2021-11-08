@@ -205,9 +205,8 @@ function App() {
         {loading ? t("Loading...") : null}
         {paymentStatus ? `Status: ${paymentStatus}` : null}
         {postErrors
-          ? `Error, please try again. Technical details: ${JSON.stringify(
-              postErrors
-            )}`
+          ? t("Error, please try again. Technical details:") +
+            ` ${JSON.stringify(postErrors)}`
           : null}
 
         <form onSubmit={handleSubmit} className="form">
@@ -222,13 +221,7 @@ function App() {
               }}
             >
               <span style={{ paddingRight: ".3em" }}>Email</span>
-              <MyPopover
-                text={
-                  currentLanguage === "pl"
-                    ? "Email zostanie wykorzystany wyłącznie w celu przeprowadzenia płatności"
-                    : "The email will only be used to process the payment"
-                }
-              />
+              <MyPopover text={t("emailNeededExplanation")} />
             </div>
             {
               <section>
@@ -292,50 +285,48 @@ function App() {
               className="submitMUIbutton"
               color="neutral"
             >
-              <Trans i18nKey="Button">PRZEŚLIJ </Trans>
+              <Trans i18nKey="Button"></Trans>
             </Button>
           </ThemeProvider>
         </form>
+
         <hr className="hrTag" />
+
         <button onClick={toggleLanguage}>
           {currentLanguage === "pl" ? "English" : "Polski"}
         </button>
+        <br />
+        <br />
+
         <footer className="footer">
           <div>
             <h4>TEATR MŁYN</h4>
             <h6>
               {" "}
-              <Trans i18nKey="footer.description1.1">
-                Stołeczne Centrum Edukacji Kulturalnej
-              </Trans>
+              <Trans i18nKey="footer.description1.1"></Trans>
             </h6>
             <h6>
               {" "}
-              <Trans i18nKey="footer.description1.2">
-                Scena Na Poddaszu III p.
-              </Trans>
+              <Trans i18nKey="footer.description1.2"></Trans>
             </h6>
             <h6>
-              <Trans i18nKey="footer.description1.3">
-                ul. Jezuicka 4 Warszawa
-              </Trans>
+              <Trans i18nKey="footer.description1.3"></Trans>
             </h6>
           </div>
           <div>
             <h4>
               {" "}
-              <Trans i18nKey="footer.Title2">KONTAKT</Trans>
+              <Trans i18nKey="footer.Title2"></Trans>
             </h4>
             <h6>fundacjamlyn@gmail.com</h6>
             <h6>promocja@fundacjamlyn.pl</h6>
             <h6>rezerwacje@fundacjamlyn.pl</h6>
             <h6>519 672 356</h6>
-            {/* <hr className="hrTag" /> */}
           </div>
           <div>
             <h4>
               {" "}
-              <Trans i18nKey="footer.Title3">ZNAJDZIESZ NAS:</Trans>
+              <Trans i18nKey="footer.Title3"></Trans>
             </h4>
             <section className="testt">
               <InstagramIcon
@@ -357,19 +348,14 @@ function App() {
                 }
               />
             </section>
-
-            {/* <hr className="hrTag" /> */}
-            {/* <p>Partnerzy teatru:</p> */}
           </div>
-
-          {/* {<h4 className="upperText">O NAS: DANE KONTAKTOWE</h4>}  */}
         </footer>
 
         <footer className="Lowerfooter">
           <div>
             <h4>
               {" "}
-              <Trans i18nKey="footer.Title4">Współfinansuje: </Trans>
+              <Trans i18nKey="footer.Title4"></Trans>
             </h4>
             <img
               src={zakochajSiewWarszawie}
@@ -383,7 +369,7 @@ function App() {
           <div>
             <h4>
               {" "}
-              <Trans i18nKey="footer.Title5">Partnerzy teatru: </Trans>
+              <Trans i18nKey="footer.Title5"></Trans>
             </h4>
             <img
               src={scek2}
