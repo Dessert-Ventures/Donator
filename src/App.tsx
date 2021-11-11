@@ -3,6 +3,7 @@ import FacebookIcon from "@mui/icons-material/Facebook"
 import InstagramIcon from "@mui/icons-material/Instagram"
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
+import CircularProgress from "@mui/material/CircularProgress"
 import { createTheme } from "@mui/material/styles"
 import TextField from "@mui/material/TextField"
 import CryptoJS from "crypto-js"
@@ -23,6 +24,9 @@ const theme = createTheme({
     neutral: {
       main: "#000000",
       contrastText: "#FFFFFF",
+    },
+    primary: {
+      main: "#731E3C",
     },
   },
 })
@@ -116,7 +120,7 @@ function App() {
     const apiUrl =
       "https://dv-cors-anywhere.herokuapp.com/https://api.sandbox.paynow.pl/v1/payments"
 
-    // IMPROVEMENT: Keep production keys on server and not in frontend env, for security
+    // IMPROVEMENT: Keep production keys on server instead
     const apiKey =
       process.env.REACT_APP_API_KEY ?? "656990db-76e1-4980-95a5-4601e82b558d"
     const apiSignatureKey =
@@ -221,131 +225,135 @@ function App() {
           <hr className="hrTag" />
         </header>
 
-        {loading ? <div>{t("Loading...")}</div> : null}
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <>
+            {postErrors ? (
+              <div>
+                {t("Error, please try again. Technical details:") +
+                  ` ${JSON.stringify(postErrors)}`}
+              </div>
+            ) : null}
 
-        {postErrors ? (
-          <div>
-            {t("Error, please try again. Technical details:") +
-              ` ${JSON.stringify(postErrors)}`}
-          </div>
-        ) : null}
+            {paymentStatus ? (
+              <div className="paymentStatus">
+                <div>{`${t("paymentStatus")}: ${t(paymentStatus)}`}</div>
 
-        {paymentStatus ? (
-          <div className="paymentStatus">
-            <div>{`${t("paymentStatus")}: ${t(paymentStatus)}`}</div>
+                <Button
+                  onClick={handlePaymentStatusViewed}
+                  variant="contained"
+                  size="medium"
+                  color="neutral"
+                  className="continueButton"
+                >
+                  <Trans i18nKey="Continue"></Trans>
+                </Button>
+              </div>
+            ) : (
+              <div>
+                <h4 className="upperText">
+                  <Trans i18nKey="title"></Trans>
+                </h4>
+
+                <form onSubmit={handleSubmit} className="form">
+                  <label>
+                    <div
+                      className="testEmail"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        flexWrap: "wrap",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <span style={{ paddingRight: ".3em" }}>Email</span>
+                      <MyPopover text={t("emailNeededExplanation")} />
+                    </div>
+                    {
+                      <section>
+                        {" "}
+                        <Box
+                          component="span"
+                          sx={{
+                            "& > :not(style)": { m: 1, width: "20ch" },
+                          }}
+                        >
+                          <TextField
+                            size="small"
+                            id="email:"
+                            name="email"
+                            variant="outlined"
+                            value={email}
+                            onChange={handleEmailChange}
+                            helperText={
+                              emailValid === false ? t("invalidInput") : ""
+                            }
+                            error={emailValid === false ? true : undefined}
+                          />
+                        </Box>
+                      </section>
+                    }
+                  </label>
+
+                  <label>
+                    <p>
+                      {" "}
+                      <Trans i18nKey="DA"></Trans>
+                    </p>
+
+                    {
+                      <section>
+                        {" "}
+                        <Box
+                          component="span"
+                          sx={{
+                            "& > :not(style)": { m: 1, width: "20ch" },
+                          }}
+                        >
+                          <TextField
+                            size="small"
+                            type="number"
+                            id="number:"
+                            name="number"
+                            variant="outlined"
+                            value={amount}
+                            onChange={handleAmountChange}
+                            helperText={
+                              amountValid === false ? t("invalidInput") : ""
+                            }
+                            error={amountValid === false ? true : undefined}
+                          />
+                        </Box>
+                      </section>
+                    }
+                  </label>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    size="medium"
+                    className="submitMUIbutton"
+                    color="neutral"
+                  >
+                    <Trans i18nKey="Button"></Trans>
+                  </Button>
+                </form>
+              </div>
+            )}
+
+            <hr className="hrTag" />
 
             <Button
-              onClick={handlePaymentStatusViewed}
+              onClick={toggleLanguage}
               variant="contained"
-              size="medium"
+              size="small"
               color="neutral"
-              className="continueButton"
+              className="toggleLanguageButton"
             >
-              <Trans i18nKey="Continue"></Trans>
+              {currentLanguage === "pl" ? "English" : "Polski"}
             </Button>
-          </div>
-        ) : (
-          <div>
-            <h4 className="upperText">
-              <Trans i18nKey="title"></Trans>
-            </h4>
-
-            <form onSubmit={handleSubmit} className="form">
-              <label>
-                <div
-                  className="testEmail"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    flexWrap: "wrap",
-                    justifyContent: "center",
-                  }}
-                >
-                  <span style={{ paddingRight: ".3em" }}>Email</span>
-                  <MyPopover text={t("emailNeededExplanation")} />
-                </div>
-                {
-                  <section>
-                    {" "}
-                    <Box
-                      component="span"
-                      sx={{
-                        "& > :not(style)": { m: 1, width: "20ch" },
-                      }}
-                    >
-                      <TextField
-                        size="small"
-                        id="email:"
-                        name="email"
-                        variant="outlined"
-                        value={email}
-                        onChange={handleEmailChange}
-                        helperText={
-                          emailValid === false ? t("invalidInput") : ""
-                        }
-                        error={emailValid === false ? true : undefined}
-                      />
-                    </Box>
-                  </section>
-                }
-              </label>
-
-              <label>
-                <p>
-                  {" "}
-                  <Trans i18nKey="DA"></Trans>
-                </p>
-
-                {
-                  <section>
-                    {" "}
-                    <Box
-                      component="span"
-                      sx={{
-                        "& > :not(style)": { m: 1, width: "20ch" },
-                      }}
-                    >
-                      <TextField
-                        size="small"
-                        type="number"
-                        id="number:"
-                        name="number"
-                        variant="outlined"
-                        value={amount}
-                        onChange={handleAmountChange}
-                        helperText={
-                          amountValid === false ? t("invalidInput") : ""
-                        }
-                        error={amountValid === false ? true : undefined}
-                      />
-                    </Box>
-                  </section>
-                }
-              </label>
-              <Button
-                type="submit"
-                variant="contained"
-                size="medium"
-                className="submitMUIbutton"
-                color="neutral"
-              >
-                <Trans i18nKey="Button"></Trans>
-              </Button>
-            </form>
-          </div>
+          </>
         )}
-
-        <hr className="hrTag" />
-
-        <Button
-          onClick={toggleLanguage}
-          variant="contained"
-          size="small"
-          color="neutral"
-          className="toggleLanguageButton"
-        >
-          {currentLanguage === "pl" ? "English" : "Polski"}
-        </Button>
 
         <br />
         <br />
