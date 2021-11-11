@@ -85,8 +85,11 @@ function App() {
     loadingSetter(true)
     postErrorsSetter(undefined)
 
-    const apiUrl =
-      "https://dv-cors-anywhere.herokuapp.com/https://api.paynow.pl/v1/payments"
+    const SANDBOX_MODE = !process.env.REACT_APP_API_KEY
+
+    const apiUrl = `https://dv-cors-anywhere.herokuapp.com/https://api.${
+      SANDBOX_MODE ? "sandbox." : ""
+    }paynow.pl/v1/payments`
 
     // IMPROVEMENT: Keep production keys on server instead
     const apiKey =
@@ -95,7 +98,7 @@ function App() {
       process.env.REACT_APP_API_SIGNATURE_KEY ??
       "7608a0f4-a923-4c5a-a644-bf00eb3bd769"
 
-    const description = "Darowizna"
+    const description = `Darowizna${SANDBOX_MODE ? " (S)" : ""}`
 
     const requestBody = JSON.stringify({
       amount: amount,
