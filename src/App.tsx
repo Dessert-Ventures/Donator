@@ -201,7 +201,7 @@ function App() {
       </header>
 
       {loading ? (
-        <div style={{ height: "20em", marginTop: "10em" }}>
+        <div style={{ height: "5em", marginTop: "20em" }}>
           <CircularProgress />
         </div>
       ) : (
