@@ -1,10 +1,8 @@
-import { ThemeProvider } from "@emotion/react"
 import FacebookIcon from "@mui/icons-material/Facebook"
 import InstagramIcon from "@mui/icons-material/Instagram"
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import CircularProgress from "@mui/material/CircularProgress"
-import { createTheme } from "@mui/material/styles"
 import TextField from "@mui/material/TextField"
 import CryptoJS from "crypto-js"
 import React, { useEffect, useState } from "react"
@@ -18,36 +16,6 @@ import TeatrMlynLogo from "./assets/TeatrMlynLogo.png"
 import zakochajSiewWarszawie from "./assets/zakochajSiewWarszawie.jpg"
 import { validateAmount, validateEmail } from "./common/Helpers"
 import MyPopover from "./components/MyPopover"
-
-const theme = createTheme({
-  palette: {
-    neutral: {
-      main: "#000000",
-      contrastText: "#FFFFFF",
-    },
-    primary: {
-      main: "#731E3C",
-    },
-  },
-})
-
-declare module "@mui/material/styles" {
-  interface Palette {
-    neutral: Palette["primary"]
-  }
-
-  // allow configuration using `createTheme`
-  interface PaletteOptions {
-    neutral?: PaletteOptions["primary"]
-  }
-}
-
-// Update the Button's color prop options
-declare module "@mui/material/Button" {
-  interface ButtonPropsColorOverrides {
-    neutral: true
-  }
-}
 
 const DEV_MODE = process.env.NODE_ENV === "development" || false
 const APP_URL = DEV_MODE ? "http://localhost:3000" : "https://wesprzyj.mlyn.org"
@@ -212,243 +180,241 @@ function App() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className="App">
-        <header className="App-header">
-          <img
-            src={TeatrMlynLogo}
-            className="App-logo"
-            alt="logo"
-            style={{ cursor: "pointer" }}
-            onClick={() => window.open("https://mlyn.org/")}
-          />
-          <hr className="hrTag" />
-        </header>
+    <div className="App">
+      <header className="App-header">
+        <img
+          src={TeatrMlynLogo}
+          className="App-logo"
+          alt="logo"
+          style={{ cursor: "pointer" }}
+          onClick={() => window.open("https://mlyn.org/")}
+        />
+        <hr className="hrTag" />
+      </header>
 
-        {loading ? (
-          <CircularProgress />
-        ) : (
-          <>
-            {postErrors ? (
-              <div>
-                {t("Error, please try again. Technical details:") +
-                  ` ${JSON.stringify(postErrors)}`}
-              </div>
-            ) : null}
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <>
+          {postErrors ? (
+            <div>
+              {t("Error, please try again. Technical details:") +
+                ` ${JSON.stringify(postErrors)}`}
+            </div>
+          ) : null}
 
-            {paymentStatus ? (
-              <div className="paymentStatus">
-                <div>{`${t("paymentStatus")}: ${t(paymentStatus)}`}</div>
+          {paymentStatus ? (
+            <div className="paymentStatus">
+              <div>{`${t("paymentStatus")}: ${t(paymentStatus)}`}</div>
 
+              <Button
+                onClick={handlePaymentStatusViewed}
+                variant="contained"
+                size="medium"
+                color="neutral"
+                className="continueButton"
+              >
+                <Trans i18nKey="Continue"></Trans>
+              </Button>
+            </div>
+          ) : (
+            <div>
+              <h4 className="upperText">
+                <Trans i18nKey="title"></Trans>
+              </h4>
+
+              <form onSubmit={handleSubmit} className="form">
+                <label>
+                  <div
+                    className="testEmail"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      flexWrap: "wrap",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <span style={{ paddingRight: ".3em" }}>Email</span>
+                    <MyPopover text={t("emailNeededExplanation")} />
+                  </div>
+                  {
+                    <section>
+                      {" "}
+                      <Box
+                        component="span"
+                        sx={{
+                          "& > :not(style)": { m: 1, width: "20ch" },
+                        }}
+                      >
+                        <TextField
+                          size="small"
+                          id="email:"
+                          name="email"
+                          variant="outlined"
+                          value={email}
+                          onChange={handleEmailChange}
+                          helperText={
+                            emailValid === false ? t("invalidInput") : ""
+                          }
+                          error={emailValid === false ? true : undefined}
+                        />
+                      </Box>
+                    </section>
+                  }
+                </label>
+
+                <label>
+                  <p>
+                    {" "}
+                    <Trans i18nKey="DA"></Trans>
+                  </p>
+
+                  {
+                    <section>
+                      {" "}
+                      <Box
+                        component="span"
+                        sx={{
+                          "& > :not(style)": { m: 1, width: "20ch" },
+                        }}
+                      >
+                        <TextField
+                          size="small"
+                          type="number"
+                          id="number:"
+                          name="number"
+                          variant="outlined"
+                          value={amount}
+                          onChange={handleAmountChange}
+                          helperText={
+                            amountValid === false ? t("invalidInput") : ""
+                          }
+                          error={amountValid === false ? true : undefined}
+                        />
+                      </Box>
+                    </section>
+                  }
+                </label>
                 <Button
-                  onClick={handlePaymentStatusViewed}
+                  type="submit"
                   variant="contained"
                   size="medium"
+                  className="submitMUIbutton"
                   color="neutral"
-                  className="continueButton"
                 >
-                  <Trans i18nKey="Continue"></Trans>
+                  <Trans i18nKey="Button"></Trans>
                 </Button>
-              </div>
-            ) : (
-              <div>
-                <h4 className="upperText">
-                  <Trans i18nKey="title"></Trans>
-                </h4>
+              </form>
+            </div>
+          )}
 
-                <form onSubmit={handleSubmit} className="form">
-                  <label>
-                    <div
-                      className="testEmail"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        flexWrap: "wrap",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <span style={{ paddingRight: ".3em" }}>Email</span>
-                      <MyPopover text={t("emailNeededExplanation")} />
-                    </div>
-                    {
-                      <section>
-                        {" "}
-                        <Box
-                          component="span"
-                          sx={{
-                            "& > :not(style)": { m: 1, width: "20ch" },
-                          }}
-                        >
-                          <TextField
-                            size="small"
-                            id="email:"
-                            name="email"
-                            variant="outlined"
-                            value={email}
-                            onChange={handleEmailChange}
-                            helperText={
-                              emailValid === false ? t("invalidInput") : ""
-                            }
-                            error={emailValid === false ? true : undefined}
-                          />
-                        </Box>
-                      </section>
-                    }
-                  </label>
+          <hr className="hrTag" />
 
-                  <label>
-                    <p>
-                      {" "}
-                      <Trans i18nKey="DA"></Trans>
-                    </p>
+          <Button
+            onClick={toggleLanguage}
+            variant="contained"
+            size="small"
+            color="neutral"
+            className="toggleLanguageButton"
+          >
+            {currentLanguage === "pl" ? "English" : "Polski"}
+          </Button>
+        </>
+      )}
 
-                    {
-                      <section>
-                        {" "}
-                        <Box
-                          component="span"
-                          sx={{
-                            "& > :not(style)": { m: 1, width: "20ch" },
-                          }}
-                        >
-                          <TextField
-                            size="small"
-                            type="number"
-                            id="number:"
-                            name="number"
-                            variant="outlined"
-                            value={amount}
-                            onChange={handleAmountChange}
-                            helperText={
-                              amountValid === false ? t("invalidInput") : ""
-                            }
-                            error={amountValid === false ? true : undefined}
-                          />
-                        </Box>
-                      </section>
-                    }
-                  </label>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    size="medium"
-                    className="submitMUIbutton"
-                    color="neutral"
-                  >
-                    <Trans i18nKey="Button"></Trans>
-                  </Button>
-                </form>
-              </div>
-            )}
+      <br />
+      <br />
 
-            <hr className="hrTag" />
-
-            <Button
-              onClick={toggleLanguage}
-              variant="contained"
-              size="small"
-              color="neutral"
-              className="toggleLanguageButton"
-            >
-              {currentLanguage === "pl" ? "English" : "Polski"}
-            </Button>
-          </>
-        )}
-
-        <br />
-        <br />
-
-        <footer className="footer">
-          <div>
-            <h4>TEATR MŁYN</h4>
-            <h6>
-              {" "}
-              <Trans i18nKey="footer.description1.1"></Trans>
-            </h6>
-            <h6>
-              {" "}
-              <Trans i18nKey="footer.description1.2"></Trans>
-            </h6>
-            <h6>
-              <Trans i18nKey="footer.description1.3"></Trans>
-            </h6>
-          </div>
-          <div>
-            <h4>
-              {" "}
-              <Trans i18nKey="footer.Title2"></Trans>
-            </h4>
-            <h6>fundacjamlyn@gmail.com</h6>
-            <h6>promocja@fundacjamlyn.pl</h6>
-            <h6>rezerwacje@fundacjamlyn.pl</h6>
-            <h6>519 672 356</h6>
-          </div>
-          <div>
-            <h4>
-              {" "}
-              <Trans i18nKey="footer.Title3"></Trans>
-            </h4>
-            <section className="testt">
-              <InstagramIcon
-                fontSize="large"
-                style={{ cursor: "pointer" }}
-                onClick={() =>
-                  window.open("https://www.instagram.com/teatrmlyn/")
-                }
-              />
-            </section>
-            <section className="testt">
-              <FacebookIcon
-                fontSize="large"
-                style={{ cursor: "pointer" }}
-                onClick={() =>
-                  window.open(
-                    "https://www.facebook.com/fundacja.artystyczna.mlyn"
-                  )
-                }
-              />
-            </section>
-          </div>
-        </footer>
-
-        <footer className="Lowerfooter">
-          <div>
-            <h4>
-              {" "}
-              <Trans i18nKey="footer.Title4"></Trans>
-            </h4>
-            <img
-              src={zakochajSiewWarszawie}
-              className="partner-logo1"
-              alt="logo"
+      <footer className="footer">
+        <div>
+          <h4>TEATR MŁYN</h4>
+          <h6>
+            {" "}
+            <Trans i18nKey="footer.description1.1"></Trans>
+          </h6>
+          <h6>
+            {" "}
+            <Trans i18nKey="footer.description1.2"></Trans>
+          </h6>
+          <h6>
+            <Trans i18nKey="footer.description1.3"></Trans>
+          </h6>
+        </div>
+        <div>
+          <h4>
+            {" "}
+            <Trans i18nKey="footer.Title2"></Trans>
+          </h4>
+          <h6>fundacjamlyn@gmail.com</h6>
+          <h6>promocja@fundacjamlyn.pl</h6>
+          <h6>rezerwacje@fundacjamlyn.pl</h6>
+          <h6>519 672 356</h6>
+        </div>
+        <div>
+          <h4>
+            {" "}
+            <Trans i18nKey="footer.Title3"></Trans>
+          </h4>
+          <section className="testt">
+            <InstagramIcon
+              fontSize="large"
               style={{ cursor: "pointer" }}
-              onClick={() => window.open("https://um.warszawa.pl/")}
+              onClick={() =>
+                window.open("https://www.instagram.com/teatrmlyn/")
+              }
             />
-          </div>
+          </section>
+          <section className="testt">
+            <FacebookIcon
+              fontSize="large"
+              style={{ cursor: "pointer" }}
+              onClick={() =>
+                window.open(
+                  "https://www.facebook.com/fundacja.artystyczna.mlyn"
+                )
+              }
+            />
+          </section>
+        </div>
+      </footer>
 
-          <div>
-            <h4>
-              {" "}
-              <Trans i18nKey="footer.Title5"></Trans>
-            </h4>
-            <img
-              src={scek2}
-              className="partner-logo"
-              alt="logo"
-              style={{ cursor: "pointer" }}
-              onClick={() => window.open("https://scek.pl/")}
-            />
-            <img
-              src={dzienDobryWarszawo}
-              className="partner-logo"
-              alt="logo"
-              style={{ cursor: "pointer" }}
-              onClick={() => window.open("https://www.dziendobrywarszawo.pl/")}
-            />
-          </div>
-        </footer>
-      </div>
-    </ThemeProvider>
+      <footer className="Lowerfooter">
+        <div>
+          <h4>
+            {" "}
+            <Trans i18nKey="footer.Title4"></Trans>
+          </h4>
+          <img
+            src={zakochajSiewWarszawie}
+            className="partner-logo1"
+            alt="logo"
+            style={{ cursor: "pointer" }}
+            onClick={() => window.open("https://um.warszawa.pl/")}
+          />
+        </div>
+
+        <div>
+          <h4>
+            {" "}
+            <Trans i18nKey="footer.Title5"></Trans>
+          </h4>
+          <img
+            src={scek2}
+            className="partner-logo"
+            alt="logo"
+            style={{ cursor: "pointer" }}
+            onClick={() => window.open("https://scek.pl/")}
+          />
+          <img
+            src={dzienDobryWarszawo}
+            className="partner-logo"
+            alt="logo"
+            style={{ cursor: "pointer" }}
+            onClick={() => window.open("https://www.dziendobrywarszawo.pl/")}
+          />
+        </div>
+      </footer>
+    </div>
   )
 }
 
