@@ -19,5 +19,6 @@
   "paymentStatus": "Payment status",
   "CONFIRMED": "Successful. Thank you!",
   "ERROR": "Error. Please try again.",
+  "REJECTED": "Rejected. Please try again.",
   "Continue": "Continue"
 }

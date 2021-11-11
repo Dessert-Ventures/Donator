@@ -19,5 +19,6 @@
   "paymentStatus": "Status płatności",
   "CONFIRMED": "Zakończona powodzeniem. Dziękujemy!",
   "ERROR": "Błąd. Prosimy spróbowac ponownie.",
+  "REJECTED": "Odrzucona. Prosimy spróbowac ponownie.",
   "Continue": "Dalej"
 }
