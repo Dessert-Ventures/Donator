@@ -11,7 +11,7 @@ import reportWebVitals from "./reportWebVitals"
 const theme = createTheme({
   palette: {
     neutral: {
-      main: "#000000",
+      main: "#731E3C",
       contrastText: "#FFFFFF",
     },
     primary: {
