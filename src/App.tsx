@@ -85,7 +85,12 @@ function App() {
     loadingSetter(true)
     postErrorsSetter(undefined)
 
-    const SANDBOX_MODE = !process.env.REACT_APP_API_KEY
+    const SANDBOX_MODE =
+      !process.env.REACT_APP_API_KEY || !process.env.REACT_APP_API_SIGNATURE_KEY
+
+    if (SANDBOX_MODE) {
+      console.log("Using Paynow's sandbox API")
+    }
 
     const apiUrl = `https://dv-cors-anywhere.herokuapp.com/https://api.${
       SANDBOX_MODE ? "sandbox." : ""
@@ -196,7 +201,9 @@ function App() {
       </header>
 
       {loading ? (
-        <CircularProgress />
+        <div style={{ height: "20em", marginTop: "10em" }}>
+          <CircularProgress />
+        </div>
       ) : (
         <>
           {postErrors ? (
