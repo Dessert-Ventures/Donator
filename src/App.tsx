@@ -86,7 +86,7 @@ function App() {
     postErrorsSetter(undefined)
 
     const apiUrl =
-      "https://dv-cors-anywhere.herokuapp.com/https://api.sandbox.paynow.pl/v1/payments"
+      "https://dv-cors-anywhere.herokuapp.com/https://api.paynow.pl/v1/payments"
 
     // IMPROVEMENT: Keep production keys on server instead
     const apiKey =
