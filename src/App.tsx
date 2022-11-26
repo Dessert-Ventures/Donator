@@ -92,7 +92,9 @@ function App() {
       console.log("Using Paynow's sandbox API")
     }
 
-    const apiUrl = `https://dv-cors-anywhere.herokuapp.com/https://api.${
+    const apiUrl = `https://personal-369712.ew.r.appspot.com/https://api.${
+    // const apiUrl = `https://cors-anywhere.tarasiuk.me/https://api.${
+    // const apiUrl = `https://api.${
       SANDBOX_MODE ? "sandbox." : ""
     }paynow.pl/v1/payments`
 
