@@ -6,13 +6,13 @@ import CircularProgress from "@mui/material/CircularProgress"
 import TextField from "@mui/material/TextField"
 import CryptoJS from "crypto-js"
 import React, { useEffect, useState } from "react"
-import ReactGA from "react-ga"
+import ReactGA from "react-ga4"
 import { Trans, useTranslation } from "react-i18next"
 import { v4 as uuid } from "uuid"
 import "./App.css"
+import TeatrMlynLogo from "./assets/TeatrMlynLogo.png"
 import dzienDobryWarszawo from "./assets/dzienDobryWarszawo.png"
 import scek2 from "./assets/scek2.jpg"
-import TeatrMlynLogo from "./assets/TeatrMlynLogo.png"
 import zakochajSiewWarszawie from "./assets/zakochajSiewWarszawie.jpg"
 import { validateAmount, validateEmail } from "./common/Helpers"
 import MyPopover from "./components/MyPopover"
@@ -161,9 +161,8 @@ function App() {
   }
 
   useEffect(() => {
-    const TRACKING_ID = "UA-207896383-1"
-    ReactGA.initialize(TRACKING_ID)
-    ReactGA.pageview(window.location.pathname + window.location.search)
+    const GA4_MEASUREMENT_ID = "G-PFPNQ5VLXY"
+    ReactGA.initialize(GA4_MEASUREMENT_ID)
 
     // IMPROVEMENT: Add crash reporting
 
